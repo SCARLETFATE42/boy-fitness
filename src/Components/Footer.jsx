@@ -1,24 +1,44 @@
-import { Box, Text } from '@mantine/core'
-import Muscle from '../assets/Muscle.svg'
-import React from 'react'
+import { Box, Text } from '@mantine/core';
+import Muscle from '../assets/Muscle.svg';
+import React from 'react';
 
 const Footer = () => {
   return (
-    <>
-      <Box className='Footer mt-20 p-6 flex flex-col justify-center items-center bg-[#fff3f4] text-white text-center absolute bottom-0 w-full'>
-        <Box className='text-center text-gray-700 gap-10'>
-          <Box className='!flex !justify-center !items-center !mb-4 !pb-10'>
-            <img src={Muscle} alt="Muscle" className='w-[100px] h-24 object-contain' />
-            <Text className='!mt-7 !text-5xl !text-center !text-[#3A1212] !font-bold'>Fітↁѓір</Text>
-          </Box>
-          <Text className='!text-3xl !font-bold !mb-2'>Stay Fit, Stay Healthy!</Text>
-          <Text className='!text-lg !font-bold'>Made with ❤️ React</Text>
-          <Text className='!text-lg !font-bold'>© 2025 All rights reserved</Text>
-          <Text className='!text-lg !font-bold'>Designed by <a href="https://yourwebsite.com" className='!text-blue-500'>Michael Emediong</a></Text>
-        </Box>
+    <Box
+      className="
+        !w-full 
+        !bg-[#fff3f4] 
+        !px-4 
+        !py-8 
+        !flex 
+        !flex-col 
+        !items-center 
+        !text-center
+        !mt-20
+      "
+    >
+      <Box className="!flex !flex-col md:!flex-row !justify-center !items-center !gap-6 !mb-6">
+        <img src={Muscle} alt="Muscle" className="!w-24 !h-24 !object-contain" />
+        <Text className="!text-4xl md:!text-5xl !text-[#3A1212] !font-bold">Fітↁѓір</Text>
       </Box>
-    </>
-  )
-}
 
-export default Footer
+      <Text className="!text-2xl md:!text-3xl !font-bold !mb-2 !text-gray-700">
+        Stay Fit, Stay Healthy!
+      </Text>
+      <Text className="!text-base md:!text-lg !font-bold !text-gray-700">
+        Made with ❤️ React
+      </Text>
+      <Text className="!text-base md:!text-lg !font-bold !text-gray-700">
+        © 2025 All rights reserved
+      </Text>
+      <Text className="!text-base md:!text-lg !font-bold !text-gray-700">
+        Designed by{' '}
+        <a href="https://yourwebsite.com" className="!text-blue-500 !hover:underline">
+          Michael Emediong
+        </a>
+      </Text>
+    </Box>
+  );
+};
+
+export default Footer;

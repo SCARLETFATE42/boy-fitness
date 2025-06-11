@@ -1,44 +1,22 @@
 import React, { useState, useId, useRef, useEffect } from 'react';
 import { Box, Text } from '@mantine/core';
 import { AnimatePresence, motion } from "motion/react";
-import ExerciseDetail from './ExerciseDetail'; // Adjust path as needed
-
-
-const CARD_STYLE = {
-  width: 300,
-  height: 450,
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'flex-start',
-  alignItems: 'center',
-  // border: '1px solid #e0e0e0',
-  borderTop: '4px solid #ff2625',
-  boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-  cursor: 'pointer',
-  borderRadius: 12,
-  background: '#fff',
-  // margin: 'auto',
-  overflow: 'hidden',
-  padding: 16,
-};
+import ExerciseDetail from './ExerciseDetail';
 
 const ExerciseCardComponent = ({ exercise }) => {
   const [active, setActive] = useState(null);
   const id = useId();
   const ref = useRef(null);
 
-  // Escape key and body scroll lock
   useEffect(() => {
     function onKeyDown(event) {
       if (event.key === "Escape") setActive(null);
     }
-    if (active) document.body.style.overflow = "hidden";
-    else document.body.style.overflow = "auto";
+    document.body.style.overflow = active ? "hidden" : "auto";
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [active]);
 
-  // Outside click to close
   useEffect(() => {
     function handleClick(e) {
       if (ref.current && !ref.current.contains(e.target)) setActive(null);
@@ -47,30 +25,28 @@ const ExerciseCardComponent = ({ exercise }) => {
     return () => document.removeEventListener("mousedown", handleClick);
   }, [active]);
 
-  // Render a single exercise card
   const renderExercise = (item, idx) => (
     <motion.div
       key={idx}
       layoutId={`card-${item.id}-${id}`}
       onClick={() => setActive(item)}
-      className="!cursor-pointer"
-      style={CARD_STYLE}
-      whileHover={{ scale: 1.03 }}
+      className="cursor-pointer bg-white rounded-xl shadow-md p-4 w-full max-w-xs flex flex-col items-center transition-transform hover:scale-105"
     >
       {item.gifUrl && (
         <img
           src={item.gifUrl}
           alt={item.name}
-          style={{ width: '100%',  objectFit: 'cover', borderRadius: 8, margin: '12px 0' }}
           loading="lazy"
+          className="w-full h-48 object-cover rounded-lg mb-4"
         />
       )}
-      <Text className='!mt-10 !font-medium !text-lg'>{item.name || `Exercise ${idx + 1}`}</Text>
-      {item.bodyPart && <Text className='!mt-1'>Body Part: {item.bodyPart}</Text>}
+      <Text className="text-lg font-semibold text-center capitalize">{item.name || `Exercise ${idx + 1}`}</Text>
+      {item.bodyPart && (
+        <Text className="text-sm text-gray-600 mt-1">Body Part: {item.bodyPart}</Text>
+      )}
     </motion.div>
   );
 
-  // Modal for expanded card
   const ExpandedModal = () => (
     <AnimatePresence>
       {active && (
@@ -82,22 +58,21 @@ const ExerciseCardComponent = ({ exercise }) => {
             className="fixed inset-0 bg-black/20 h-full w-full z-10"
             onClick={() => setActive(null)}
           />
-          <div className="fixed inset-0 grid place-items-center z-[100]">
+          <div className="fixed inset-0 grid place-items-center z-[100] p-4">
             <motion.div
               ref={ref}
               layoutId={`card-${active.id}-${id}`}
-              className="w-full max-w-[500px] h-full md:h-fit md:max-h-[90%] flex flex-col bg-white dark:bg-neutral-900 sm:rounded-3xl overflow-hidden"
+              className="w-full max-w-[600px] max-h-[90vh] overflow-auto bg-white dark:bg-neutral-900 rounded-2xl relative"
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
             >
               <button
-                className="flex absolute top-2 right-2 items-center justify-center bg-white rounded-full h-6 w-6 z-10"
+                className="absolute top-3 right-3 bg-white rounded-full h-8 w-8 flex items-center justify-center shadow-md"
                 onClick={() => setActive(null)}
               >
-                <span style={{ fontWeight: "bold", fontSize: 18 }}>×</span>
+                <span className="text-xl font-bold">×</span>
               </button>
-              {/* Render ExerciseDetail here */}
               <ExerciseDetail exercise={active} />
             </motion.div>
           </div>
@@ -106,37 +81,18 @@ const ExerciseCardComponent = ({ exercise }) => {
     </AnimatePresence>
   );
 
-  if (Array.isArray(exercise)) {
-    return (
-      <>
-        <ExpandedModal />
-        <Box style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-          gap: '24px',
-          justifyItems: 'center'
-        }}>
-          {exercise.map(renderExercise)}
-        </Box>
-      </>
-    );
-  }
-
-  if (typeof exercise === 'object') {
-    return (
-      <>
-        <ExpandedModal />
-        <Box style={{
-          display: 'flex',
-          justifyContent: 'center'
-        }}>
-          {renderExercise(exercise, 0)}
-        </Box>
-      </>
-    );
-  }
-
-  return null;
+  return (
+    <>
+      <ExpandedModal />
+      <Box className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center p-4">
+        {Array.isArray(exercise)
+          ? exercise.map(renderExercise)
+          : typeof exercise === 'object'
+          ? renderExercise(exercise, 0)
+          : null}
+      </Box>
+    </>
+  );
 };
 
 export default ExerciseCardComponent;

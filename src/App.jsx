@@ -15,6 +15,7 @@ const App=() => {
   return (
     <>
     <BrowserRouter>
+    <Box className='max-w-[1280px] m-auto p-8'>
     <Box>
       <Navbar />
     </Box>
@@ -37,6 +38,7 @@ const App=() => {
 }/>
         <Route path="/exercise/:id" element={<Exercicsedetail />}/>
       </Routes>
+      </Box>
       <Footer />
       </BrowserRouter>
     </>

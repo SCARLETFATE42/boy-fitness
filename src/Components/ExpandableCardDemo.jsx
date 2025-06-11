@@ -70,7 +70,7 @@ export function ExpandableCardDemo({ exercises }) {
                   <img
                     src={active.gifUrl || active.src}
                     alt={active.name || active.title}
-                    className="w-full h-[400px] object-cover object-top rounded-lg mb-4"
+                    className="w-full h-[400px] object-cover object-top rounded-lg "
                   />
                 ) : null}
                 <h3 className="font-medium text-center items-center justify-center flex text-4xl capitalize">

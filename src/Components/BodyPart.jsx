@@ -1,37 +1,30 @@
-import { Box, Text } from '@mantine/core'
-import React from 'react'
-import Baixar from '../assets/icons/Baixar.png' // Assuming you have an image at this path
+import { Box, Text } from '@mantine/core';
+import React from 'react';
+import Baixar from '../assets/icons/Baixar.png';
 
 const BodyPart = ({ item, setBodyPart, bodyPart }) => {
-  const isSelected = bodyPart === item
+  const isSelected = bodyPart === item;
+
   return (
     <Box
-      className='!flex !items-center !justify-center !p-2 !m-2'
+      className='!flex !flex-col !items-center !justify-center !p-4 !m-2 !transition-all !duration-300 !cursor-pointer !w-[240px] !h-[180px] sm:!w-[200px] sm:!h-[160px] !bg-white !rounded-xl hover:!shadow-lg'
       style={{
-        borderTop: isSelected ? '4px solid #ff2625' : '2px solid #fff',
-        // backgroundColor: '#fff',
-        borderRadius: '16px',
-        borderColor: isSelected ? '4px solid #ff2625' : '#000',
-        cursor: 'pointer',
-        width: '240px',
-        height: '180px',
-        transition: 'border 0.2s',
-        // gap: '47px',
+        borderTop: isSelected ? '4px solid #ff2625' : '4px solid transparent',
+        borderColor: isSelected ? '#ff2625' : '#e0e0e0',
       }}
-      onClick={() => (typeof setBodyPart === "function" ? setBodyPart(item) : null)}
+      onClick={() => typeof setBodyPart === 'function' && setBodyPart(item)}
     >
       <img
         src={Baixar}
         alt="Baixar"
-        style={{
-          width: 40,
-          height: 40,
-          objectFit: 'contain',
-        }}
+        className="!w-[40px] !h-[40px] !mb-4"
+        style={{ objectFit: 'contain' }}
       />
-      
+      <Text className='!text-lg !font-semibold !capitalize !text-center'>
+        {item?.name || item}
+      </Text>
     </Box>
-  )
-}
+  );
+};
 
-export default BodyPart
+export default BodyPart;

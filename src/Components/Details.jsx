@@ -31,9 +31,9 @@ const Details = ( { exerciseDetail } ) => {
           <Text className='!text-black !text-xl !mt-8'>Exercise keeps you fit and healthy. {name} is a great way to stay in shape! It is a
         <Text component="span" className='!font-bold'> {target}</Text> focused exercise that helps you stay fit.</Text>
           {extraDetail.map((item, index) => (
-            <Box key={index} className='flex items-center gap-2 mt-8'>
-              <Button className='flex items-center justify-center p-2 bg-[#fff2bd] rounded-full'>
-                <img src={item.icon} alt={item.name} className='w-[50px] h-[50px] object-contain' />
+            <Box key={index} className='!flex !items-center !gap-2 !mt-8 !w-full'>
+              <Button className='!flex !items-center !justify-center !bg-[#fff2bd] !rounded-full'>
+                <img src={item.icon} alt={item.name} className='!w-[50px] !h-[50px] !object-contain' />
               </Button>
               <Text className='!text-black !text-xl !capitalize'>{item.name}</Text>
             </Box>

@@ -3,6 +3,9 @@ import React, { useState, useEffect } from 'react'
 import HorizontalScrollbar from './HorizontalScrollbar';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import ExerciseCard from './exerciseCard';
+import { ExpandableCardDemo } from './ExpandableCardDemo';
+
+const CARD_STYLE = "transition-all duration-300 hover:scale-105 hover:shadow-2xl rounded-lg mb-4";
 
 const SimilarExercises = ({ targetMuscleExercises, equipmentExercises }) => {
   const [loading, setLoading] = useState(true);
@@ -29,7 +32,7 @@ const SimilarExercises = ({ targetMuscleExercises, equipmentExercises }) => {
 
   return (
    <>
-    <Text className='!text-black !text-3xl'>Exercises that target the same muscle group</Text>
+    <Text className='!text-black !text-3xl !capitalize'>Exercises that target the same muscle group</Text>
     <Box className='!flex !flex-col !items-center !justify-center !gap-8 !mt-6 !mb-7'>
       <Box>
         {targetMuscleExercises.length ? 
@@ -37,18 +40,19 @@ const SimilarExercises = ({ targetMuscleExercises, equipmentExercises }) => {
             data={targetMuscleExercises}
             renderItem={item => (
               <Box className="mb-4">
-                <ExerciseCard exercise={item} />
+                  <ExerciseCard exercise={item}  />
+               
               </Box>
             )}
-          />
-          : <DotLottieReact
-              src="path/to/animation.lottie"
-              loop
-              autoplay
+            />
+            : <DotLottieReact
+            src="path/to/animation.lottie"
+            loop
+            autoplay
             />}
       </Box>
     </Box>
-    <Text className='!text-black !text-3xl'>Exercises that target the same muscle group</Text>
+    <Text className='!text-black !text-3xl !capitalize'>Equpiments that target the same muscle group</Text>
     <Box className='!flex !flex-col !items-center !justify-center !gap-8 !mt-6'>
       <Box>
         {equipmentExercises.length ? 

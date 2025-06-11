@@ -55,7 +55,7 @@ export function ExpandableCardDemo({ exercises }) {
               className="flex absolute top-2 right-2 lg:hidden items-center justify-center bg-white rounded-full h-6 w-6"
               onClick={() => setActive(null)}
             >
-              <CloseIcon />
+              
             </motion.button>
             <motion.div
               layoutId={`card-${active.id || active.title}-${id}`}
@@ -73,12 +73,12 @@ export function ExpandableCardDemo({ exercises }) {
                     className="w-full h-[400px] object-cover object-top rounded-lg mb-4"
                   />
                 ) : null}
-                <h3 className="font-medium text-center items-center justify-center flex text-4xl mb-5 pb-2">
+                <h3 className="font-medium text-center items-center justify-center flex text-4xl capitalize">
                   {active.name || active.title}
                 </h3>
                 {/* Visit Button */}
                 <button
-                  className="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-6 rounded mb-4 transition"
+                  className="bg-red-600 hover:bg-red-800 text-white font-semibold py-2 px-6 rounded mt-4 transition"
                   value="Visit"
                   onClick={() => {
                     // Navigate to the detail page, e.g. /exercise/123
@@ -111,20 +111,20 @@ export function ExpandableCardDemo({ exercises }) {
                   height={180}
                   src={exercise.gifUrl || exercise.src}
                   alt={exercise.name || exercise.title}
-                  className="w-full h-48 object-cover object-top rounded-lg mb-4"
+                  className="w-full h-48 object-cover object-top rounded-lg mb-2"
                 />
               </motion.div>
             )}
             <div className="flex flex-col items-center w-full">
               <motion.h3
                 layoutId={`title-${exercise.id || exercise.title}-${id}`}
-                className="font-medium text-black text-center text-base mb-2"
+                className="font-medium text-black text-center text-base"
               >
                 {exercise.name || exercise.title}
               </motion.h3>
               <motion.p
                 layoutId={`description-${exercise.id || exercise.title}-${id}`}
-                className="text-white text-center text-base"
+                className="text-black text-start text-base mt-3"
               >
                 {exercise.description}
               </motion.p>

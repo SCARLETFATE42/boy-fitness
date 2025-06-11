@@ -53,7 +53,7 @@ const ExerciseCardComponent = ({ exercise }) => {
       key={idx}
       layoutId={`card-${item.id}-${id}`}
       onClick={() => setActive(item)}
-      className="cursor-pointer"
+      className="!cursor-pointer"
       style={CARD_STYLE}
       whileHover={{ scale: 1.03 }}
     >
@@ -65,8 +65,8 @@ const ExerciseCardComponent = ({ exercise }) => {
           loading="lazy"
         />
       )}
-      <Text className='mt-10 font-medium text-lg'>{item.name || `Exercise ${idx + 1}`}</Text>
-      {item.bodyPart && <Text className='mt-1'>Body Part: {item.bodyPart}</Text>}
+      <Text className='!mt-10 !font-medium !text-lg'>{item.name || `Exercise ${idx + 1}`}</Text>
+      {item.bodyPart && <Text className='!mt-1'>Body Part: {item.bodyPart}</Text>}
     </motion.div>
   );
 

@@ -26,14 +26,14 @@ const Exercises = ({ exercises = [], setexercises, bodyPart, loading = false }) 
 
   return (
     <>
-      <Text className="mb-[46px] text-3xl font-medium">Showing Results</Text>
+      <Text className="!mb-[46px] !text-3xl !font-medium">Showing Results</Text>
       {/* Use ExpandableCardDemo with BentoGrid styling */}
-      <div className="max-w-4xl w-full mx-auto md:auto-rows-[25rem] cursor-pointer gap-8">
+      <div className="!max-w-4xl !w-full !mx-auto !md:auto-rows-[25rem] !cursor-pointer !gap-8">
         <ExpandableCardDemo exercises={paginatedExercises} />
       </div>
       {totalPages > 1 && (
-        <Box className="flex flex-col items-center mt-12">
-          <Text className="text-gray-500 mb-2 mt-6">
+        <Box className="!flex !flex-col !items-center !mt-12">
+          <Text className="!text-gray-500 !mb-2 !mt-6">
             Page {activePage} of {totalPages}
           </Text>
           <Pagination
@@ -44,27 +44,27 @@ const Exercises = ({ exercises = [], setexercises, bodyPart, loading = false }) 
             color="red"
             size="lg"
             radius="xl"
-            className="mb-2 gap-4"
+            className="!mb-2 !gap-4"
             withEdges
             classNames={{
               control:
-                "border-[1.5px] border-black p-3 text-black font-semibold rounded-lg transition-all duration-150 hover:bg-red-100 hover:text-red-600 hover:border-red-300",
+                "!border-[1.5px] !border-black !p-3 !text-black !font-semibold !rounded-lg !transition-all !duration-150 !hover:bg-red-100 !hover:text-red-600 !hover:border-red-300",
               active:
-                "bg-red-600 text-white border-black p-3 font-bold",
-              previous: "visible",
-              next: "visible",
+                "!bg-red-600 !text-white !border-black !p-3 !font-bold",
+              previous: "!visible",
+              next: "!visible",
             }}
           />
         </Box>
       )}
       {loading && (
-        <Box className="flex justify-center items-center mt-8">
-          <Text className="text-gray-500">Loading...</Text>
+        <Box className="!flex !justify-center !items-center !mt-8">
+          <Text className="!text-gray-500">Loading...</Text>
         </Box>
       )}
       {!loading && safeExercises.length === 0 && (
-        <Box className="flex justify-center items-center mt-8">
-          <Text className="text-gray-500">No exercises found.</Text>
+        <Box className="!flex !justify-center !items-center !mt-8">
+          <Text className="!text-gray-500">No exercises found.</Text>
         </Box>
       )}
     </>

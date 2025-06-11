@@ -129,11 +129,11 @@ const SearchExercises = ({ setExercises, bodyPart, setBodyPart }) => {
     : allExercises.filter(ex => ex.bodyPart === bodyPart);
 
   return (
-    <Box className='items-center justify-center p-5 mt-9'>
-      <Text className='font-bold text-[44px] mb-[50px] text-center'>
+    <Box className='!items-center justify-center p-5 mt-9'>
+      <Text className='!font-bold !text-[44px] !mb-[50px] !text-center'>
         Search Exercises by Name or Muscle
       </Text>
-      <Box className="flex flex-col gap-3 w-full mb-5 max-w-xl mx-auto">
+      <Box className="!flex !flex-col !gap-3 !w-full !mb-5 !max-w-xl !mx-auto">
         <PlaceholdersAndVanishInput
           placeholders={["biceps", "triceps", "chest", "back", "legs"]}
           value={exercise}

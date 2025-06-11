@@ -9,11 +9,11 @@ const ExerciseVideo = ({ exerciseVideos, name }) => {
 
   return (
     <>
-      <Box className="exercise-video mt-[200px] mb-[100px] p-5">
-        <Text className='text-black text-2xl font-medium mb-[33px]'>
-          Watch <span className='font-medium text-[#ff2625] capitalize'>{name}</span> Exercise Video
+      <Box className="exercise-video !mt-[200px] !mb-[100px] !p-5">
+        <Text className='!text-black !text-2xl !font-medium !mb-[33px]'>
+          Watch <span className='!font-medium !text-[#ff2625] !capitalize'>{name}</span> Exercise Video
         </Text>
-        <Box className='flex flex-wrap justify-start gap-[40px] border-t border-gray-300 pt-5'>
+        <Box className='!flex !flex-wrap !justify-start !gap-[40px] !border-t !border-gray-300 !pt-5'>
           {exerciseVideos
             .slice(0, 6)
           .map((item)=>{
@@ -23,15 +23,15 @@ const ExerciseVideo = ({ exerciseVideos, name }) => {
                     href={`https://www.youtube.com/watch?v=${item.video.videoId}`}
                     target="_blank"
                     rel="noreferrer"
-                    className='flex flex-col items-center justify-center'
+                    className='!flex !flex-col !items-center !justify-center'
                     title={item.video.title}
                   >
                     <img
                       src={item.video.thumbnails[0].url}
                       alt={item.video.title}
-                      className='w-full h-[200px] object-cover rounded-lg mb-2'
+                      className='!w-full !h-[200px] !object-cover !rounded-lg !mb-2'
                     />
-                    <Text className='mt-2 font-medium text-lg text-black text-center'>{item.video.title}</Text>
+                    <Text className='!mt-2 !font-medium !text-lg !text-black !text-center'>{item.video.title}</Text>
                   </a>
                 </Box>
             )

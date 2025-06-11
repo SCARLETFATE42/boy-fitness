@@ -16,9 +16,9 @@ const Exercisedetail = ({ exercise }) => {
   return (
     <Box p={4} >
       {/* <Text size="xl" weight={700} className='text-white'>{exercise.name}</Text> */}
-      <Text mt="sm" className='text-black'>Body Part: {exercise.bodyPart}</Text>
-      <Text mt="sm" className='text-black'>Target: {exercise.target}</Text>
-      <Text mt="sm" className='text-black'>Equipment: {exercise.equipment}</Text>
+      <Text mt="sm" className='!text-black'>Body Part: {exercise.bodyPart}</Text>
+      <Text mt="sm" className='!text-black'>Target: {exercise.target}</Text>
+      <Text mt="sm" className='!text-black'>Equipment: {exercise.equipment}</Text>
     </Box>
   );
 };

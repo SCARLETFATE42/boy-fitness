@@ -17,7 +17,7 @@ const SimilarExercises = ({ targetMuscleExercises, equipmentExercises }) => {
 
   if (loading) {
     return (
-      <Box className="flex justify-center items-center min-h-[200px]">
+      <Box className="!flex !justify-center !items-center min-h-[200px]">
         <DotLottieReact
           src="path/to/animation.lottie"
           loop
@@ -29,8 +29,8 @@ const SimilarExercises = ({ targetMuscleExercises, equipmentExercises }) => {
 
   return (
    <>
-    <Text className='text-black text-3xl'>Exercises that target the same muscle group</Text>
-    <Box className='flex flex-col items-center justify-center gap-8 mt-6 mb-7'>
+    <Text className='!text-black !text-3xl'>Exercises that target the same muscle group</Text>
+    <Box className='!flex !flex-col !items-center !justify-center !gap-8 !mt-6 !mb-7'>
       <Box>
         {targetMuscleExercises.length ? 
           <HorizontalScrollbar
@@ -48,8 +48,8 @@ const SimilarExercises = ({ targetMuscleExercises, equipmentExercises }) => {
             />}
       </Box>
     </Box>
-    <Text className='text-black text-3xl'>Exercises that target the same muscle group</Text>
-    <Box className='flex flex-col items-center justify-center gap-8 mt-6'>
+    <Text className='!text-black !text-3xl'>Exercises that target the same muscle group</Text>
+    <Box className='!flex !flex-col !items-center !justify-center !gap-8 !mt-6'>
       <Box>
         {equipmentExercises.length ? 
           <HorizontalScrollbar

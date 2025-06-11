@@ -8,11 +8,11 @@ import  Muscle  from '../assets/Muscle.svg'
 const Navbar = () => {
   return (
   <>
-   <Box className='flex justify-center items-center m-auto p-4'>
-   <Link to="/" className='flex justify-center items-center gap-2 text-[#3A1212]'>
-   <Box className='flex'>
-    <img src={Muscle} alt="Flex Logo" className='w-[8%] h-[8%] ml-5' />
-    <Text className='mt-7 text-5xl text-center font-bold'>Fітↁѓір</Text>
+   <Box className='!flex !justify-center !items-center !m-auto !p-4'>
+   <Link to="/" className='!flex !justify-center !items-center !gap-2 !text-[#3A1212]'>
+   <Box className='!flex'>
+    <img src={Muscle} alt="Flex Logo" className='!w-[8%] !h-[8%] !ml-5' />
+    <Text className='!mt-7 !text-5xl !text-center !font-bold'>Fітↁѓір</Text>
    </Box>
    
    </Link>
@@ -26,8 +26,8 @@ const Navbar = () => {
       wrap="wrap"
       // className='flex-row justify-start items-start gap-[xl]'
     >
-  <Button><Link to="/" className="text-[#3A1212] border-b-4 border-b-[#FF2625]">Home</Link></Button>
-  <Button><a href="#exercises" className="text-[#3A1212]">Exercises</a></Button>
+  <Button><Link to="/" className="!text-[#3A1212] !border-b-4 !border-b-[#FF2625]">Home</Link></Button>
+  <Button><a href="#exercises" className="!text-[#3A1212]">Exercises</a></Button>
 </Flex>
 
    </Box>

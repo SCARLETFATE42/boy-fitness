@@ -6,7 +6,7 @@ const BodyPart = ({ item, setBodyPart, bodyPart }) => {
   const isSelected = bodyPart === item
   return (
     <Box
-      className='flex items-center justify-center p-2 m-2'
+      className='!flex !items-center !justify-center !p-2 !m-2'
       style={{
         borderTop: isSelected ? '4px solid #ff2625' : '2px solid #fff',
         // backgroundColor: '#fff',

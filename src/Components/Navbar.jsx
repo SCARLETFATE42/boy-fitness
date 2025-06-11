@@ -9,8 +9,8 @@ const Navbar = () => {
   return (
   <>
    <Box className='flex justify-center items-center m-auto p-4'>
-   <Link to="/" className='flex justify-center items-center gap-2 text-[#3A1212] border-b-4 border-b-[#FF2625]'>
-   <Box className='flex w-11'>
+   <Link to="/" className='flex justify-center items-center gap-2 text-[#3A1212]'>
+   <Box className='flex'>
     <img src={Muscle} alt="Flex Logo" className='w-[8%] h-[8%] ml-5' />
     <Text className='mt-7 text-5xl text-center font-bold'>Fітↁѓір</Text>
    </Box>

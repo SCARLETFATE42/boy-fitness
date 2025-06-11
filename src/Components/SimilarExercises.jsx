@@ -17,8 +17,7 @@ const SimilarExercises = ({ targetMuscleExercises, equipmentExercises }) => {
 
   if (loading) {
     return (
-      <Box className="flex justify-center items-center min-h-[200px] border border-gray-300 rounded-lg">
-        <Text className='text-black text-2xl font-medium mb-[33px]'>Loading Similar Exercises...</Text>
+      <Box className="flex justify-center items-center min-h-[200px]">
         <DotLottieReact
           src="path/to/animation.lottie"
           loop

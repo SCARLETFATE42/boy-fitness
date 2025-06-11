@@ -9,7 +9,7 @@ const Footer = () => {
         <Box className='text-center text-gray-700 gap-10'>
           <Box className='flex justify-center items-center mb-4 pb-10'>
             <img src={Muscle} alt="Muscle" className='w-[100px] h-24 object-contain' />
-            <Text className='mt-7 text-5xl text-center font-bold'>Fітↁѓір</Text>
+            <Text className='mt-7 text-5xl text-center text-[#3A1212] font-bold'>Fітↁѓір</Text>
           </Box>
           <Text className='text-3xl font-bold mb-2'>Stay Fit, Stay Healthy!</Text>
           <Text className='text-lg font-bold'>Made with ❤️ React</Text>

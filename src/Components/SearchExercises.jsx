@@ -10,6 +10,7 @@ const SearchExercises = ({ setExercises, bodyPart, setBodyPart }) => {
   const [selectedBodyPart, setSelectedBodyPart] = useState('');
   const [error, setError] = useState('');
   const [cooldown, setCooldown] = useState(false);
+  const [allExercises, setAllExercises] = useState([]); // NEW STATE FOR ALL EXERCISES
 
   // Fetch body parts for the horizontal scrollbar (optional UI)
   useEffect(() => {
@@ -23,6 +24,20 @@ const SearchExercises = ({ setExercises, bodyPart, setBodyPart }) => {
       }
     };
     fetchBodyParts();
+  }, []);
+
+  // NEW: Fetch all exercises on initial load (if needed)
+  useEffect(() => {
+    const fetchAllExercises = async () => {
+      try {
+        const response = await fetch('https://exercisedb.p.rapidapi.com/exercises', exerciseOptions);
+        const data = await response.json();
+        setAllExercises(data);
+      } catch (err) {
+        setAllExercises([]);
+      }
+    };
+    fetchAllExercises();
   }, []);
 
   // Search for exercises by name or muscle (old search)
@@ -108,6 +123,11 @@ const SearchExercises = ({ setExercises, bodyPart, setBodyPart }) => {
     // eslint-disable-next-line
   }, [bodyPart]);
 
+  // Example filtering logic
+  const displayedExercises = bodyPart === 'all'
+    ? allExercises // allExercises is the full array from the API
+    : allExercises.filter(ex => ex.bodyPart === bodyPart);
+
   return (
     <Box className='items-center justify-center p-5 mt-9'>
       <Text className='font-bold text-[44px] mb-[50px] text-center'>
@@ -125,10 +145,10 @@ const SearchExercises = ({ setExercises, bodyPart, setBodyPart }) => {
       </Box>
       <Box>
         <HorizontalScrollbar
-          data={bodyParts}
-          bodyPart={bodyPart}
-          setBodyPart={setBodyPart}
+          data={bodyParts} // bodyParts includes "all" as the first item
           isBodyParts={true}
+          setBodyPart={setBodyPart}
+          bodyPart={bodyPart}
         />
       </Box>
     </Box>

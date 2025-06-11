@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Flex } from '@mantine/core'
+import { Box, Flex, Text } from '@mantine/core'
 import { Link } from 'react-router-dom'
 import { Button } from '@mui/material'
 import  Muscle  from '../assets/Muscle.svg'
@@ -10,7 +10,11 @@ const Navbar = () => {
   <>
    <Box className='flex justify-center items-center m-auto p-4'>
    <Link to="/">
-   <img src={Muscle} alt="Flex Logo" className='w-[8%] h-[8%] ml-5' />
+   <Box className='flex'>
+    <img src={Muscle} alt="Flex Logo" className='w-[8%] h-[8%] ml-5' />
+    <Text className='mt-7 text-5xl text-center font-bold'>Fітↁѓір</Text>
+   </Box>
+   
    </Link>
        <Flex
       mih={50}

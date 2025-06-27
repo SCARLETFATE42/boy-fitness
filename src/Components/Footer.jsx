@@ -33,7 +33,7 @@ const Footer = () => {
       </Text>
       <Text className="!text-base md:!text-lg !font-bold !text-gray-700">
         Designed by{' '}
-        <a href="https://yourwebsite.com" className="!text-blue-500 !hover:underline">
+        <a href="https://portfolio-seven-psi-a1ngg80ta9.vercel.app/" className="text-blue-500 hover:underline">
           Michael Emediong
         </a>
       </Text>

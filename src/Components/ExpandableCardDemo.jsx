@@ -81,8 +81,12 @@ export function ExpandableCardDemo({ exercises }) {
                   className="bg-red-600 hover:bg-red-800 text-white font-semibold py-2 px-6 rounded mt-4 transition"
                   value="Visit"
                   onClick={() => {
-                    // Navigate to the detail page, e.g. /exercise/123
-                    navigate(`/exercise/${active.id}`);
+                    const identifier = active.id || active._id || active.name || active.title;
+                    // Prefer id if available, otherwise use name/title (encoded)
+                    const safeId = identifier
+                      ? encodeURIComponent(identifier)
+                      : '';
+                    navigate(`/exercise/${safeId}`);
                   }}
                 >
                   Visit

@@ -21,15 +21,35 @@ const Exercisedetail = () => {
     const fetchExerciseDetail = async () => {
       const exerciseDbUrl = 'https://exercisedb.p.rapidapi.com';
       const youtubeSearchUrl = 'https://youtube-search-and-download.p.rapidapi.com';
-      const exerciseDetailData = await fetchData(`${exerciseDbUrl}/exercises/exercise/${id}`, exerciseOptions);
+      let exerciseDetailData = null;
+      try {
+        // Try fetching by id first
+        exerciseDetailData = await fetchData(`${exerciseDbUrl}/exercises/exercise/${id}`, exerciseOptions);
+      } catch (err) {
+        console.error('Error fetching by id:', err);
+        try {
+          // Fallback: treat `id` param as name/title and search by name
+          const nameSearch = await fetchData(`${exerciseDbUrl}/exercises/name/${encodeURIComponent(id)}`, exerciseOptions);
+          // `exercises/name` returns an array — pick the first match
+          if (Array.isArray(nameSearch) && nameSearch.length > 0) {
+            exerciseDetailData = nameSearch[0];
+          }
+        } catch (err2) {
+          console.error('Fallback name-search error:', err2);
+          // leave exerciseDetailData as null
+        }
+      }
+
+      if (!exerciseDetailData) return;
+
       setExercisedetail(exerciseDetailData);
       const exerciseVideosData = await fetchData(`${youtubeSearchUrl}/search?query=${exerciseDetailData.name}`, youtubeOptions);
-      setExerciseVideos(exerciseVideosData.contents);
+      setExerciseVideos(exerciseVideosData.contents || []);
       const targetMuscleExercisesData = await fetchData(`${exerciseDbUrl}/exercises/target/${exerciseDetailData.target}`, exerciseOptions);
-      setTargetMuscleExercises(targetMuscleExercisesData);
+      setTargetMuscleExercises(targetMuscleExercisesData || []);
 
       const equipmentExercisesData = await fetchData(`${exerciseDbUrl}/exercises/equipment/${exerciseDetailData.equipment}`, exerciseOptions);
-      setEquipmentExercises(equipmentExercisesData);
+      setEquipmentExercises(equipmentExercisesData || []);
 
     };
 

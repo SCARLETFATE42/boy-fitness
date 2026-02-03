@@ -18,11 +18,35 @@ const Home = ({ exercises, setExercises, bodyPart, setBodyPart }) => {
         );
         setBodyParts(['all', ...bodyPartsData]);
       } catch (err) {
+        console.error('Error fetching body parts:', err);
         setBodyParts([]);
       }
     };
 
     fetchBodyParts();
+  }, []);
+
+  // Load a random sample of exercises on first visit (when 'All' is default)
+  useEffect(() => {
+    const fetchInitialExercises = async () => {
+      try {
+        const all = await fetchData('https://exercisedb.p.rapidapi.com/exercises', exerciseOptions);
+        if (Array.isArray(all) && all.length > 0) {
+          // Shuffle and pick a sample to show as default
+          const shuffled = all.sort(() => 0.5 - Math.random());
+          const sample = shuffled.slice(0, 12);
+          setExercises(sample);
+          setCurrentPage(1);
+        }
+      } catch (err) {
+        console.error('Error fetching initial exercise sample:', err);
+        setExercises([]);
+      }
+    };
+
+    fetchInitialExercises();
+    // run only once on mount
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

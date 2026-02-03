@@ -1,46 +1,31 @@
-import React, { useState } from "react";
-import { Box, Pagination, Text } from "@mantine/core";
-import { exerciseOptions, fetchData } from "./utils/fetchData";
+import React from "react";
+import { Box, Text } from "@mantine/core";
 import { ExpandableCardDemo } from "./ExpandableCardDemo";
+// import { PaginationComponent } from "./utils/PaginationComponent";
 
-const ITEMS_PER_PAGE = 10;
-
-const Exercises = ({ exercises = [], setexercises, bodyPart, loading = false }) => {
+const Exercises = ({ exercises = [], loading = false, currentPage = 1, onPageChange }) => {
   // Ensure exercises is always an array
   const safeExercises = Array.isArray(exercises) ? exercises : [];
 
-  // Pagination state
-  const [activePage, setActivePage] = useState(1);
-
-  // Calculate paginated items
-  const startIdx = (activePage - 1) * ITEMS_PER_PAGE;
-  const endIdx = startIdx + ITEMS_PER_PAGE;
-  const paginatedExercises = loading
-    ? Array.from({ length: ITEMS_PER_PAGE })
-    : safeExercises.slice(startIdx, endIdx);
-
-  // Calculate total pages
-  const totalPages = loading
-    ? 1
-    : Math.ceil(safeExercises.length / ITEMS_PER_PAGE);
+  const ITEMS_PER_PAGE = 10;
 
   return (
     <>
       <Text className="!mb-[46px] !text-3xl !font-medium">Showing Results</Text>
       {/* Use ExpandableCardDemo with BentoGrid styling */}
-      <div className="!max-w-4xl !w-full !mx-auto !md:auto-rows-[25rem] !cursor-pointer !gap-8">
-        <ExpandableCardDemo exercises={paginatedExercises} />
+      <div className="max-w-5xl w-full mx-auto md:auto-rows-[25rem] cursor-pointer gap-8">
+        <ExpandableCardDemo exercises={safeExercises} />
       </div>
-      {totalPages > 1 && (
+      {safeExercises.length > 0 && (
         <Box className="!flex !flex-col !items-center !mt-12">
           <Text className="!text-gray-500 !mb-2 !mt-6">
-            Page {activePage} of {totalPages}
+            Page {currentPage}
           </Text>
           <Pagination
-            total={totalPages}
-            siblings={2}
-            value={activePage}
-            onChange={setActivePage}
+            total={999}
+            siblings={3}
+            value={currentPage}
+            onChange={(page) => onPageChange && onPageChange(page)}
             color="red"
             size="lg"
             radius="xl"

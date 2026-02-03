@@ -1,4 +1,4 @@
-import react from 'react'
+
 import Home from './Pages/Home'
 import { Box } from '@mantine/core'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'

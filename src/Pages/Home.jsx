@@ -1,20 +1,25 @@
 import { Box, Title } from '@mantine/core'
-import React, {useState, useEffect} from 'react'
+import React, { useEffect, useState } from 'react'
 import HeroBanner from '../Components/HeroBanner'
 import SearchExercises from '../Components/SearchExercises'
 import Exercises from '../Components/Exercises'
-import { fetchData } from '../Components/utils/fetchData'
+import { fetchData, exerciseOptions } from '../Components/utils/fetchData'
 
-const Home = () => {
-  const [exercises, setExercises] = useState([]);
-  const [bodyPart, setBodyPart] = useState('all');
+const Home = ({ exercises, setExercises, bodyPart, setBodyPart }) => {
   const [bodyParts, setBodyParts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     const fetchBodyParts = async () => {
-      // Example for body parts
-      const bodyPartsData = await fetchData('API_URL_FOR_BODYPARTS', options);
-      setBodyParts(['all', ...bodyPartsData]);
+      try {
+        const bodyPartsData = await fetchData(
+          'https://exercisedb.p.rapidapi.com/exercises/bodyPartList',
+          exerciseOptions
+        );
+        setBodyParts(['all', ...bodyPartsData]);
+      } catch (err) {
+        setBodyParts([]);
+      }
     };
 
     fetchBodyParts();
@@ -26,14 +31,16 @@ const Home = () => {
         <HeroBanner />
         <SearchExercises
           setExercises={setExercises}
+          setCurrentPage={setCurrentPage}
+          currentPage={currentPage}
           bodyPart={bodyPart}
           setBodyPart={setBodyPart}
           bodyParts={bodyParts}
         />
         <Exercises
           exercises={exercises}
-          setExercises={setExercises}
-          bodyPart={bodyPart}
+          currentPage={currentPage}
+          onPageChange={setCurrentPage}
         />
       </Box>
     </>

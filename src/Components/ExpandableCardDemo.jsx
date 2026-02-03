@@ -60,17 +60,17 @@ export function ExpandableCardDemo({ exercises }) {
             <motion.div
               layoutId={`card-${active.id || active.title}-${id}`}
               ref={ref}
-              className="w-full max-w-[500px] h-full md:h-fit md:max-h-[90%] flex flex-col bg-white dark:bg-neutral-900 sm:rounded-3xl overflow-hidden"
+              className="w-full max-w-[500px] md:h-[80%] flex flex-col bg-white dark:bg-neutral-900 sm:rounded-3xl overflow-hidden"
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
             >
-              <div className="flex flex-col items-start w-full p-8 bg-white border-t-4 border-red-600">
+              <div className="flex flex-col items-start w-full p-8 bg-white border-t-4 border-red-600 overflow-y-auto ">
                 {active.gifUrl || active.src ? (
                   <img
                     src={active.gifUrl || active.src}
                     alt={active.name || active.title}
-                    className="w-full h-[400px] object-cover object-top rounded-lg "
+                    className="w-50% h-[250px] object-cover object-top rounded-lg mx-auto mb-4"
                   />
                 ) : null}
                 <h3 className="font-medium text-center items-center justify-center flex text-4xl capitalize">
@@ -95,13 +95,13 @@ export function ExpandableCardDemo({ exercises }) {
         ) : null}
       </AnimatePresence>
       {/* Full width, bg-white, text-white, p-4, image above writeups */}
-      <div className="w-full  p-4 grid grid-cols-1 md:grid-cols-3 gap-4">
-        {(exercises || []).map((exercise, index) => (
+      <div className="w-full p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 flex-1">
+        {(exercises || []).map((exercise) => (
           <motion.div
             layoutId={`card-${exercise.id || exercise.title}-${id}`}
             key={exercise.id || exercise.title}
             onClick={() => setActive(exercise)}
-            className="flex flex-col items-center rounded-xl cursor-pointer bg-white text-black p-4 shadow transition-all duration-200 border-t-[1.5px] border-t-transparent hover:shadow-xl hover:border-t-red-600 hover:border-t-[4px]"
+            className="flex flex-col items-center rounded-xl cursor-pointer bg-white text-black p-4 shadow transition-all duration-200 border-t-[1.5px] border-t-transparent hover:shadow-xl hover:border-t-red-600 hover:border-t-[4px] w-full"
           >
             {/* Image above writeups - only show if not expanded */}
             {(!active || active.id !== exercise.id) && (

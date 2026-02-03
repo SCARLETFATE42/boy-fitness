@@ -4,8 +4,10 @@ import { PlaceholdersAndVanishInput } from './PlaceholdersAndVanishInput';
 import { exerciseOptions } from './utils/fetchData';
 import HorizontalScrollbar from './HorizontalScrollbar';
 
-const SearchExercises = ({ setExercises, bodyPart, setBodyPart }) => {
-  const [bodyParts, setBodyParts] = useState([]);
+const ITEMS_PER_PAGE = 10;
+
+const SearchExercises = ({ setExercises, setCurrentPage, currentPage = 1, bodyPart, setBodyPart, bodyParts: parentBodyParts }) => {
+  const [bodyParts, setBodyParts] = useState(parentBodyParts || []);
   const [exercise, setExercise] = useState('');
   const [error, setError] = useState('');
   const [cooldown, setCooldown] = useState(false);
@@ -13,6 +15,11 @@ const SearchExercises = ({ setExercises, bodyPart, setBodyPart }) => {
 
   // Fetch list of body parts
   useEffect(() => {
+    if (parentBodyParts && parentBodyParts.length) {
+      setBodyParts(parentBodyParts);
+      return;
+    }
+
     const fetchBodyParts = async () => {
       try {
         const response = await fetch(
@@ -25,6 +32,7 @@ const SearchExercises = ({ setExercises, bodyPart, setBodyPart }) => {
         setBodyParts([]);
       }
     };
+
     fetchBodyParts();
   }, []);
 
@@ -45,7 +53,7 @@ const SearchExercises = ({ setExercises, bodyPart, setBodyPart }) => {
     fetchAllExercises();
   }, []);
 
-  const handleSearch = async (e) => {
+  const handleSearch = async (e, page = 1) => {
     if (e) e.preventDefault();
     if (cooldown) return;
 
@@ -60,8 +68,9 @@ const SearchExercises = ({ setExercises, bodyPart, setBodyPart }) => {
       }
 
       try {
+        const offset = (page - 1) * ITEMS_PER_PAGE;
         const res = await fetch(
-          `https://exercisedb.p.rapidapi.com/exercises/name/${exercise.trim().toLowerCase()}`,
+          `https://exercisedb.p.rapidapi.com/exercises/name/${exercise.trim().toLowerCase()}?limit=${ITEMS_PER_PAGE}&offset=${offset}`,
           exerciseOptions
         );
         const data = await res.json();
@@ -69,6 +78,7 @@ const SearchExercises = ({ setExercises, bodyPart, setBodyPart }) => {
         if (Array.isArray(data) && data.length > 0) {
           const unique = Array.from(new Map(data.map(i => [i.id, i])).values());
           setExercises(unique);
+          setCurrentPage(page);
         } else {
           setExercises([]);
           setError('No exercises found.');
@@ -88,8 +98,9 @@ const SearchExercises = ({ setExercises, bodyPart, setBodyPart }) => {
       setError('');
       setCooldown(true);
       try {
+        const offset = (currentPage - 1) * ITEMS_PER_PAGE;
         const res = await fetch(
-          `https://exercisedb.p.rapidapi.com/exercises/bodyPart/${bodyPart}`,
+          `https://exercisedb.p.rapidapi.com/exercises/bodyPart/${bodyPart}?limit=${ITEMS_PER_PAGE}&offset=${offset}`,
           exerciseOptions
         );
         const data = await res.json();
@@ -103,7 +114,7 @@ const SearchExercises = ({ setExercises, bodyPart, setBodyPart }) => {
     };
 
     fetchByBodyPart();
-  }, [bodyPart]);
+  }, [bodyPart, currentPage]);
 
   return (
     <Box className="!w-full !px-4 sm:!px-6 md:!px-10 lg:!px-20 !py-8">

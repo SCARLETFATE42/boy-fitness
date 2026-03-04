@@ -2,11 +2,13 @@ import React, { useState, useId, useRef, useEffect } from 'react';
 import { Box, Text } from '@mantine/core';
 import { AnimatePresence, motion } from "motion/react";
 import ExerciseDetail from './ExerciseDetail';
+import { useNavigate } from 'react-router-dom';
 
 const ExerciseCardComponent = ({ exercise }) => {
   const [active, setActive] = useState(null);
   const id = useId();
   const ref = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     function onKeyDown(event) {
@@ -68,12 +70,36 @@ const ExerciseCardComponent = ({ exercise }) => {
               exit={{ scale: 0.95, opacity: 0 }}
             >
               <button
-                className="absolute top-3 right-3 bg-white rounded-full h-8 w-8 flex items-center justify-center shadow-md"
+                className="absolute top-3 right-3 bg-gray-200 hover:bg-gray-300 rounded-full h-8 w-8 flex items-center justify-center shadow-md z-10"
                 onClick={() => setActive(null)}
               >
                 <span className="text-xl font-bold">×</span>
               </button>
-              <ExerciseDetail exercise={active} />
+              <div className="flex flex-col items-center w-full p-8 bg-white border-t-4 border-red-600 overflow-y-auto max-w-[600px]">
+                {active.gifUrl && (
+                  <img
+                    src={active.gifUrl}
+                    alt={active.name}
+                    className="w-[80%] md:w-[60%] h-auto max-h-[250px] object-cover object-top rounded-lg mx-auto mb-4"
+                  />
+                )}
+                <h3 className="font-medium text-center items-center justify-center flex text-2xl md:text-4xl capitalize">
+                  {active.name}
+                </h3>
+                <button
+                  className="bg-red-600 hover:bg-red-800 text-white font-semibold py-2 px-6 rounded mt-4 transition"
+                  onClick={() => {
+                    const safeId = active.id ? encodeURIComponent(active.id) : '';
+                    setActive(null);
+                    navigate(`/exercise/${safeId}`);
+                  }}
+                >
+                  Visit
+                </button>
+                <div className="w-full text-left">
+                  <ExerciseDetail exercise={active} />
+                </div>
+              </div>
             </motion.div>
           </div>
         </>
@@ -84,13 +110,15 @@ const ExerciseCardComponent = ({ exercise }) => {
   return (
     <>
       <ExpandedModal />
-      <Box className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center p-4">
-        {Array.isArray(exercise)
-          ? exercise.map(renderExercise)
-          : typeof exercise === 'object'
-          ? renderExercise(exercise, 0)
-          : null}
-      </Box>
+      {Array.isArray(exercise) ? (
+        <Box className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center p-4">
+          {exercise.map(renderExercise)}
+        </Box>
+      ) : typeof exercise === 'object' ? (
+        <Box className="flex justify-center w-full p-4">
+          {renderExercise(exercise, 0)}
+        </Box>
+      ) : null}
     </>
   );
 };

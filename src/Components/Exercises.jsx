@@ -31,23 +31,19 @@ const Exercises = ({ exercises = [], loading = false, currentPage = 1, onPageCha
       </div>
       {safeExercises.length > 0 && (
         <Box className="!flex !flex-col !items-center !mt-12">
-          <Text className="!text-gray-500 !mb-2 !mt-6">Page {currentPage} / {totalPages}</Text>
           <Pagination
             total={totalPages}
-            siblings={3}
+            siblings={1}
             value={currentPage}
             onChange={(page) => onPageChange && onPageChange(page)}
             color="red"
             size="lg"
-            radius="xl"
-            className="!mb-2 !gap-4"
+            radius="md"
+            className="!mb-8 mt-4"
             withEdges
             classNames={{
               control:
-                "!border-[1.5px] !border-black !p-3 !text-black !font-semibold !rounded-lg !transition-all !duration-150 !hover:bg-red-100 !hover:text-red-600 !hover:border-red-300",
-              active: "!bg-red-600 !text-white !border-black !p-3 !font-bold",
-              previous: "!visible",
-              next: "!visible",
+                "!border !border-gray-200 !bg-white !text-black !font-medium !rounded-lg transition-all duration-200 hover:!bg-red-50 hover:!text-red-600 hover:!border-red-300 data-[active]:!bg-red-600 data-[active]:!text-white data-[active]:!border-red-600 data-[disabled]:!opacity-50 data-[disabled]:!cursor-not-allowed",
             }}
           />
         </Box>

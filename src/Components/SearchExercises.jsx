@@ -68,9 +68,8 @@ const SearchExercises = ({ setExercises, setCurrentPage, currentPage = 1, bodyPa
       }
 
       try {
-        const offset = (page - 1) * ITEMS_PER_PAGE;
         const res = await fetch(
-          `https://exercisedb.p.rapidapi.com/exercises/name/${exercise.trim().toLowerCase()}?limit=${ITEMS_PER_PAGE}&offset=${offset}`,
+          `https://exercisedb.p.rapidapi.com/exercises/name/${exercise.trim().toLowerCase()}?limit=1000`,
           exerciseOptions
         );
         const data = await res.json();
@@ -78,7 +77,7 @@ const SearchExercises = ({ setExercises, setCurrentPage, currentPage = 1, bodyPa
         if (Array.isArray(data) && data.length > 0) {
           const unique = Array.from(new Map(data.map(i => [i.id, i])).values());
           setExercises(unique);
-          setCurrentPage(page);
+          setCurrentPage(1);
         } else {
           setExercises([]);
           setError('No exercises found.');
@@ -98,9 +97,8 @@ const SearchExercises = ({ setExercises, setCurrentPage, currentPage = 1, bodyPa
       setError('');
       setCooldown(true);
       try {
-        const offset = (currentPage - 1) * ITEMS_PER_PAGE;
         const res = await fetch(
-          `https://exercisedb.p.rapidapi.com/exercises/bodyPart/${bodyPart}?limit=${ITEMS_PER_PAGE}&offset=${offset}`,
+          `https://exercisedb.p.rapidapi.com/exercises/bodyPart/${bodyPart}?limit=1000`,
           exerciseOptions
         );
         const data = await res.json();

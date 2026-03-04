@@ -86,6 +86,7 @@ export function ExpandableCardDemo({ exercises }) {
                     const safeId = identifier
                       ? encodeURIComponent(identifier)
                       : '';
+                    setActive(null);
                     navigate(`/exercise/${safeId}`);
                   }}
                 >

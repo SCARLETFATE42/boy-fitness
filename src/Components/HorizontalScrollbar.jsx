@@ -65,7 +65,7 @@ const HorizontalScrollbar = ({ bodyPart, setBodyPart, data = [], isBodyParts, re
         <Box className="!flex !gap-4 !min-w-full">
           {Array.isArray(data) &&
             data.map((item, idx) => (
-              <Box key={item.id || idx} className="!shrink-0 !w-[200px]">
+              <Box key={item.id || idx} className={`!shrink-0 ${isBodyParts ? '!w-[200px]' : '!w-auto'}`}>
                 {typeof renderItem === "function" ? (
                   renderItem(item, idx)
                 ) : isBodyParts ? (

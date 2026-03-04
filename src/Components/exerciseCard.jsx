@@ -75,31 +75,7 @@ const ExerciseCardComponent = ({ exercise }) => {
               >
                 <span className="text-xl font-bold">×</span>
               </button>
-              <div className="flex flex-col items-center w-full p-8 bg-white border-t-4 border-red-600 overflow-y-auto max-w-[600px]">
-                {active.gifUrl && (
-                  <img
-                    src={active.gifUrl}
-                    alt={active.name}
-                    className="w-[80%] md:w-[60%] h-auto max-h-[250px] object-cover object-top rounded-lg mx-auto mb-4"
-                  />
-                )}
-                <h3 className="font-medium text-center items-center justify-center flex text-2xl md:text-4xl capitalize">
-                  {active.name}
-                </h3>
-                <button
-                  className="bg-red-600 hover:bg-red-800 text-white font-semibold py-2 px-6 rounded mt-4 transition"
-                  onClick={() => {
-                    const safeId = active.id ? encodeURIComponent(active.id) : '';
-                    setActive(null);
-                    navigate(`/exercise/${safeId}`);
-                  }}
-                >
-                  Visit
-                </button>
-                <div className="w-full text-left">
-                  <ExerciseDetail exercise={active} />
-                </div>
-              </div>
+              <ExerciseDetail exercise={active} />
             </motion.div>
           </div>
         </>
